@@ -39,7 +39,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpb2_b9y3w.js
+// include: /tmp/tmpe0zh4rad.js
 
   if (!Module.expectedDataFileDownloads) {
     Module.expectedDataFileDownloads = 0;
@@ -224,25 +224,25 @@ Module['FS_createPath']("/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU
     }
 
     }
-    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 0, "end": 2187}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 2187, "end": 2725}], "remote_package_size": 2725});
+    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 0, "end": 2208}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 2208, "end": 2744}], "remote_package_size": 2744});
 
   })();
 
-// end include: /tmp/tmpb2_b9y3w.js
-// include: /tmp/tmplj1mi8e2.js
+// end include: /tmp/tmpe0zh4rad.js
+// include: /tmp/tmpshdvhei1.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmplj1mi8e2.js
-// include: /tmp/tmpkr6d6wod.js
+  // end include: /tmp/tmpshdvhei1.js
+// include: /tmp/tmp1sfrsvia.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmpkr6d6wod.js
+  // end include: /tmp/tmp1sfrsvia.js
 
 
 // Sometimes an existing Module object exists with properties
