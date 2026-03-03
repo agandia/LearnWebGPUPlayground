@@ -39,7 +39,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpd5oji_4a.js
+// include: /tmp/tmppde93s5u.js
 
   if (!Module.expectedDataFileDownloads) {
     Module.expectedDataFileDownloads = 0;
@@ -224,25 +224,25 @@ Module['FS_createPath']("/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU
     }
 
     }
-    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 0, "end": 2200}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 2200, "end": 2736}], "remote_package_size": 2736});
+    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.txt", "start": 0, "end": 352}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 352, "end": 2283}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 2283, "end": 2819}], "remote_package_size": 2819});
 
   })();
 
-// end include: /tmp/tmpd5oji_4a.js
-// include: /tmp/tmpd1fg0plw.js
+// end include: /tmp/tmppde93s5u.js
+// include: /tmp/tmp8b95z_je.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmpd1fg0plw.js
-// include: /tmp/tmpydbi6pkq.js
+  // end include: /tmp/tmp8b95z_je.js
+// include: /tmp/tmp75f7r9uh.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmpydbi6pkq.js
+  // end include: /tmp/tmp75f7r9uh.js
 
 
 // Sometimes an existing Module object exists with properties
@@ -8229,6 +8229,36 @@ function dbg(...args) {
       return WebGPU.mgrShaderModule.create(device.createShaderModule(desc));
     };
 
+  
+  var _wgpuDeviceCreateTexture = (deviceId, descriptor) => {
+      assert(descriptor);assert(HEAPU32[((descriptor)>>2)] === 0);
+  
+      var desc = {
+        "label": undefined,
+        "size": WebGPU.makeExtent3D(descriptor + 16),
+        "mipLevelCount": HEAPU32[(((descriptor)+(32))>>2)],
+        "sampleCount": HEAPU32[(((descriptor)+(36))>>2)],
+        "dimension": WebGPU.TextureDimension[
+          HEAPU32[(((descriptor)+(12))>>2)]],
+        "format": WebGPU.TextureFormat[
+          HEAPU32[(((descriptor)+(28))>>2)]],
+        "usage": HEAPU32[(((descriptor)+(8))>>2)],
+      };
+      var labelPtr = HEAPU32[(((descriptor)+(4))>>2)];
+      if (labelPtr) desc["label"] = UTF8ToString(labelPtr);
+  
+      var viewFormatCount = HEAPU32[(((descriptor)+(40))>>2)];
+      if (viewFormatCount) {
+        var viewFormatsPtr = HEAPU32[(((descriptor)+(44))>>2)];
+        // viewFormatsPtr pointer to an array of TextureFormat which is an enum of size uint32_t
+        desc["viewFormats"] = Array.from(HEAP32.subarray((((viewFormatsPtr)>>2)), ((viewFormatsPtr + viewFormatCount * 4)>>2)),
+          function(format) { return WebGPU.TextureFormat[format]; });
+      }
+  
+      var device = WebGPU.mgrDevice.get(deviceId);
+      return WebGPU.mgrTexture.create(device.createTexture(desc));
+    };
+
   var _wgpuDeviceGetQueue = (deviceId) => {
       var queueId = WebGPU.mgrDevice.objects[deviceId].queueId;
       assert(queueId, 'wgpuDeviceGetQueue: queue was missing or null');
@@ -8949,6 +8979,8 @@ var wasmImports = {
   wgpuDeviceCreateRenderPipeline: _wgpuDeviceCreateRenderPipeline,
   /** @export */
   wgpuDeviceCreateShaderModule: _wgpuDeviceCreateShaderModule,
+  /** @export */
+  wgpuDeviceCreateTexture: _wgpuDeviceCreateTexture,
   /** @export */
   wgpuDeviceGetQueue: _wgpuDeviceGetQueue,
   /** @export */
