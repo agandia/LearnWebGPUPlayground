@@ -10,7 +10,7 @@ Currently this project uses the emscripten 3.1.61 standard.
 The project is expected to evolve over time, so features and visuals may change frequently.
 
 You can try the live demo here:  
-[🔗 View the WebGPU Playground](https://agandia.github.io/LearnWebGPUPlayground/)
+[🔗 View the WebGPU Playground](https://agandia.github.io/LearnWebGPUPlayground/LearnWebGPU.html)
 
 If you are interested in exploring the source code, feel free to clone the repository:  
-[🔗 GitHub Repository](https://github.com/agandia/LearnWebGPU/LearnWebGPU.html)
+[🔗 GitHub Repository](https://github.com/agandia/LearnWebGPU)
