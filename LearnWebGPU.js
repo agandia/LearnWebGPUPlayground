@@ -39,7 +39,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp3xx96xu2.js
+// include: /tmp/tmphhs8pewh.js
 
   if (!Module.expectedDataFileDownloads) {
     Module.expectedDataFileDownloads = 0;
@@ -224,25 +224,25 @@ Module['FS_createPath']("/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU
     }
 
     }
-    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.txt", "start": 0, "end": 352}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 352, "end": 2283}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 2283, "end": 2819}], "remote_package_size": 2819});
+    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.txt", "start": 0, "end": 352}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 352, "end": 1986}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 1986, "end": 2522}], "remote_package_size": 2522});
 
   })();
 
-// end include: /tmp/tmp3xx96xu2.js
-// include: /tmp/tmpjxag1y32.js
+// end include: /tmp/tmphhs8pewh.js
+// include: /tmp/tmpfc87jbyb.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmpjxag1y32.js
-// include: /tmp/tmpb8kdn4a4.js
+  // end include: /tmp/tmpfc87jbyb.js
+// include: /tmp/tmp2dc_8wvh.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmpb8kdn4a4.js
+  // end include: /tmp/tmp2dc_8wvh.js
 
 
 // Sometimes an existing Module object exists with properties
