@@ -39,7 +39,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp3pvswmlu.js
+// include: /tmp/tmp0hrzj87t.js
 
   if (!Module.expectedDataFileDownloads) {
     Module.expectedDataFileDownloads = 0;
@@ -224,25 +224,25 @@ Module['FS_createPath']("/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU
     }
 
     }
-    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.txt", "start": 0, "end": 1085}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 1085, "end": 3007}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 3007, "end": 3543}], "remote_package_size": 3543});
+    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/mammoth.obj", "start": 0, "end": 15866556}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.obj", "start": 15866556, "end": 15874468}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.txt", "start": 15874468, "end": 15875553}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 15875553, "end": 15877475}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 15877475, "end": 15878011}], "remote_package_size": 15878011});
 
   })();
 
-// end include: /tmp/tmp3pvswmlu.js
-// include: /tmp/tmp11kahnr9.js
+// end include: /tmp/tmp0hrzj87t.js
+// include: /tmp/tmptbiod4hc.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmp11kahnr9.js
-// include: /tmp/tmpl0i1qgb9.js
+  // end include: /tmp/tmptbiod4hc.js
+// include: /tmp/tmptr9xkp9x.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmpl0i1qgb9.js
+  // end include: /tmp/tmptr9xkp9x.js
 
 
 // Sometimes an existing Module object exists with properties
@@ -7613,21 +7613,6 @@ function dbg(...args) {
 
   var _wgpuBindGroupRelease = (id) => WebGPU.mgrBindGroup.release(id);
 
-  
-  /** @suppress {duplicate } */
-  var setTempRet0 = (val) => __emscripten_tempret_set(val);
-  var _setTempRet0 = setTempRet0;
-  
-  var _wgpuBufferGetSize = function(bufferId) {
-  
-    var ret = (() => { 
-      var buffer = WebGPU.mgrBuffer.get(bufferId);
-      // 64-bit
-      return buffer.size;
-     })();
-    return (setTempRet0((tempDouble = ret,(+(Math.abs(tempDouble))) >= 1.0 ? (tempDouble > 0.0 ? (+(Math.floor((tempDouble)/4294967296.0)))>>>0 : (~~((+(Math.ceil((tempDouble - +(((~~(tempDouble)))>>>0))/4294967296.0)))))>>>0) : 0)), ret>>>0);
-  };
-
   var _wgpuBufferRelease = (id) => WebGPU.mgrBuffer.release(id);
 
   var _wgpuCommandBufferRelease = (id) => WebGPU.mgrCommandBuffer.release(id);
@@ -8407,9 +8392,9 @@ function dbg(...args) {
     ;
   }
 
-  var _wgpuRenderPassEncoderDrawIndexed = (passId, indexCount, instanceCount, firstIndex, baseVertex, firstInstance) => {
+  var _wgpuRenderPassEncoderDraw = (passId, vertexCount, instanceCount, firstVertex, firstInstance) => {
       var pass = WebGPU.mgrRenderPassEncoder.get(passId);
-      pass.drawIndexed(indexCount, instanceCount, firstIndex, baseVertex, firstInstance);
+      pass.draw(vertexCount, instanceCount, firstVertex, firstInstance);
     };
 
   var _wgpuRenderPassEncoderEnd = (encoderId) => {
@@ -8432,19 +8417,6 @@ function dbg(...args) {
         pass.setBindGroup(groupIndex, group, offsets);
       }
     };
-
-  
-  function _wgpuRenderPassEncoderSetIndexBuffer(passId,bufferId,format,offset_low, offset_high,size_low, size_high) {
-    var offset = convertI32PairToI53Checked(offset_low, offset_high);
-    var size = convertI32PairToI53Checked(size_low, size_high);
-  
-    
-      var pass = WebGPU.mgrRenderPassEncoder.get(passId);
-      var buffer = WebGPU.mgrBuffer.get(bufferId);
-      if (size == -1) size = undefined;
-      pass.setIndexBuffer(buffer, WebGPU.IndexFormat[format], offset, size);
-    ;
-  }
 
   var _wgpuRenderPassEncoderSetPipeline = (passId, pipelineId) => {
       var pass = WebGPU.mgrRenderPassEncoder.get(passId);
@@ -8954,8 +8926,6 @@ var wasmImports = {
   /** @export */
   wgpuBindGroupRelease: _wgpuBindGroupRelease,
   /** @export */
-  wgpuBufferGetSize: _wgpuBufferGetSize,
-  /** @export */
   wgpuBufferRelease: _wgpuBufferRelease,
   /** @export */
   wgpuCommandBufferRelease: _wgpuCommandBufferRelease,
@@ -9000,15 +8970,13 @@ var wasmImports = {
   /** @export */
   wgpuQueueWriteBuffer: _wgpuQueueWriteBuffer,
   /** @export */
-  wgpuRenderPassEncoderDrawIndexed: _wgpuRenderPassEncoderDrawIndexed,
+  wgpuRenderPassEncoderDraw: _wgpuRenderPassEncoderDraw,
   /** @export */
   wgpuRenderPassEncoderEnd: _wgpuRenderPassEncoderEnd,
   /** @export */
   wgpuRenderPassEncoderRelease: _wgpuRenderPassEncoderRelease,
   /** @export */
   wgpuRenderPassEncoderSetBindGroup: _wgpuRenderPassEncoderSetBindGroup,
-  /** @export */
-  wgpuRenderPassEncoderSetIndexBuffer: _wgpuRenderPassEncoderSetIndexBuffer,
   /** @export */
   wgpuRenderPassEncoderSetPipeline: _wgpuRenderPassEncoderSetPipeline,
   /** @export */
@@ -9059,6 +9027,7 @@ var dynCall_vi = Module['dynCall_vi'] = createExportWrapper('dynCall_vi', 2);
 var dynCall_vii = Module['dynCall_vii'] = createExportWrapper('dynCall_vii', 3);
 var dynCall_iii = Module['dynCall_iii'] = createExportWrapper('dynCall_iii', 3);
 var dynCall_v = Module['dynCall_v'] = createExportWrapper('dynCall_v', 1);
+var dynCall_iiiiiii = Module['dynCall_iiiiiii'] = createExportWrapper('dynCall_iiiiiii', 7);
 var dynCall_jiji = Module['dynCall_jiji'] = createExportWrapper('dynCall_jiji', 5);
 var dynCall_iiii = Module['dynCall_iiii'] = createExportWrapper('dynCall_iiii', 4);
 var dynCall_viijii = Module['dynCall_viijii'] = createExportWrapper('dynCall_viijii', 7);
@@ -9066,7 +9035,6 @@ var dynCall_iidiiii = Module['dynCall_iidiiii'] = createExportWrapper('dynCall_i
 var dynCall_iiiii = Module['dynCall_iiiii'] = createExportWrapper('dynCall_iiiii', 5);
 var dynCall_iiiiii = Module['dynCall_iiiiii'] = createExportWrapper('dynCall_iiiiii', 6);
 var dynCall_iiiiiiiii = Module['dynCall_iiiiiiiii'] = createExportWrapper('dynCall_iiiiiiiii', 9);
-var dynCall_iiiiiii = Module['dynCall_iiiiiii'] = createExportWrapper('dynCall_iiiiiii', 7);
 var dynCall_iiiiij = Module['dynCall_iiiiij'] = createExportWrapper('dynCall_iiiiij', 7);
 var dynCall_iiiiid = Module['dynCall_iiiiid'] = createExportWrapper('dynCall_iiiiid', 6);
 var dynCall_iiiiijj = Module['dynCall_iiiiijj'] = createExportWrapper('dynCall_iiiiijj', 9);
@@ -9101,6 +9069,7 @@ var missingLibrarySymbols = [
   'convertI32PairToI53',
   'convertU32PairToI53',
   'getTempRet0',
+  'setTempRet0',
   'ydayFromDate',
   'inetPton4',
   'inetNtop4',
@@ -9251,7 +9220,6 @@ var unexportedSymbols = [
   'stackSave',
   'stackRestore',
   'stackAlloc',
-  'setTempRet0',
   'ptrToString',
   'zeroMemory',
   'exitJS',
