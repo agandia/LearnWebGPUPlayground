@@ -39,7 +39,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp0hrzj87t.js
+// include: /tmp/tmpjx4exvtj.js
 
   if (!Module.expectedDataFileDownloads) {
     Module.expectedDataFileDownloads = 0;
@@ -224,25 +224,25 @@ Module['FS_createPath']("/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU
     }
 
     }
-    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/mammoth.obj", "start": 0, "end": 15866556}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.obj", "start": 15866556, "end": 15874468}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.txt", "start": 15874468, "end": 15875553}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 15875553, "end": 15877475}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 15877475, "end": 15878011}], "remote_package_size": 15878011});
+    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/cube.obj", "start": 0, "end": 911}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/mammoth.obj", "start": 911, "end": 15867467}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/plane.obj", "start": 15867467, "end": 15867769}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.obj", "start": 15867769, "end": 15875681}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.txt", "start": 15875681, "end": 15876766}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 15876766, "end": 15879001}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 15879001, "end": 15879537}], "remote_package_size": 15879537});
 
   })();
 
-// end include: /tmp/tmp0hrzj87t.js
-// include: /tmp/tmptbiod4hc.js
+// end include: /tmp/tmpjx4exvtj.js
+// include: /tmp/tmpbtdaahjk.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmptbiod4hc.js
-// include: /tmp/tmptr9xkp9x.js
+  // end include: /tmp/tmpbtdaahjk.js
+// include: /tmp/tmp5l840jq_.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmptr9xkp9x.js
+  // end include: /tmp/tmp5l840jq_.js
 
 
 // Sometimes an existing Module object exists with properties
@@ -8392,6 +8392,19 @@ function dbg(...args) {
     ;
   }
 
+  var _wgpuQueueWriteTexture = (queueId,
+        destinationPtr, data, dataSize, dataLayoutPtr, writeSizePtr) => {
+      var queue = WebGPU.mgrQueue.get(queueId);
+  
+      var destination = WebGPU.makeImageCopyTexture(destinationPtr);
+      var dataLayout = WebGPU.makeTextureDataLayout(dataLayoutPtr);
+      var writeSize = WebGPU.makeExtent3D(writeSizePtr);
+      // This subarray isn't strictly necessary, but helps work around an issue
+      // where Chromium makes a copy of the entire heap. crbug.com/1134457
+      var subarray = HEAPU8.subarray(data, data + dataSize);
+      queue.writeTexture(destination, subarray, dataLayout, writeSize);
+    };
+
   var _wgpuRenderPassEncoderDraw = (passId, vertexCount, instanceCount, firstVertex, firstInstance) => {
       var pass = WebGPU.mgrRenderPassEncoder.get(passId);
       pass.draw(vertexCount, instanceCount, firstVertex, firstInstance);
@@ -8535,6 +8548,8 @@ function dbg(...args) {
       var texture = WebGPU.mgrTexture.get(textureId);
       return WebGPU.mgrTextureView.create(texture.createView(desc));
     };
+
+  var _wgpuTextureDestroy = (textureId) => WebGPU.mgrTexture.get(textureId).destroy();
 
   var _wgpuTextureGetFormat = (textureId) => {
       var texture = WebGPU.mgrTexture.get(textureId);
@@ -8970,6 +8985,8 @@ var wasmImports = {
   /** @export */
   wgpuQueueWriteBuffer: _wgpuQueueWriteBuffer,
   /** @export */
+  wgpuQueueWriteTexture: _wgpuQueueWriteTexture,
+  /** @export */
   wgpuRenderPassEncoderDraw: _wgpuRenderPassEncoderDraw,
   /** @export */
   wgpuRenderPassEncoderEnd: _wgpuRenderPassEncoderEnd,
@@ -8997,6 +9014,8 @@ var wasmImports = {
   wgpuSurfaceUnconfigure: _wgpuSurfaceUnconfigure,
   /** @export */
   wgpuTextureCreateView: _wgpuTextureCreateView,
+  /** @export */
+  wgpuTextureDestroy: _wgpuTextureDestroy,
   /** @export */
   wgpuTextureGetFormat: _wgpuTextureGetFormat,
   /** @export */
