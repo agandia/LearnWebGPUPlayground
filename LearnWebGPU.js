@@ -39,7 +39,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpjx4exvtj.js
+// include: /tmp/tmpbta2pafz.js
 
   if (!Module.expectedDataFileDownloads) {
     Module.expectedDataFileDownloads = 0;
@@ -224,25 +224,25 @@ Module['FS_createPath']("/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU
     }
 
     }
-    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/cube.obj", "start": 0, "end": 911}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/mammoth.obj", "start": 911, "end": 15867467}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/plane.obj", "start": 15867467, "end": 15867769}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.obj", "start": 15867769, "end": 15875681}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.txt", "start": 15875681, "end": 15876766}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 15876766, "end": 15879001}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 15879001, "end": 15879537}], "remote_package_size": 15879537});
+    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/brickwall.jpg", "start": 0, "end": 198744}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/cube.obj", "start": 198744, "end": 199655}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/fourareen.mtl", "start": 199655, "end": 199963}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/fourareen.obj", "start": 199963, "end": 5291698}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/fourareen2K_albedo.jpg", "start": 5291698, "end": 6696380}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/mammoth.obj", "start": 6696380, "end": 22562936}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/plane.obj", "start": 22562936, "end": 22563238}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.obj", "start": 22563238, "end": 22571150}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.txt", "start": 22571150, "end": 22572235}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 22572235, "end": 22574549}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 22574549, "end": 22575085}], "remote_package_size": 22575085});
 
   })();
 
-// end include: /tmp/tmpjx4exvtj.js
-// include: /tmp/tmpbtdaahjk.js
+// end include: /tmp/tmpbta2pafz.js
+// include: /tmp/tmpmagu9i93.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmpbtdaahjk.js
-// include: /tmp/tmp5l840jq_.js
+  // end include: /tmp/tmpmagu9i93.js
+// include: /tmp/tmppw7v8wxq.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmp5l840jq_.js
+  // end include: /tmp/tmppw7v8wxq.js
 
 
 // Sometimes an existing Module object exists with properties
@@ -4411,6 +4411,159 @@ function dbg(...args) {
       return false;
     };
 
+  var JSEvents = {
+  removeAllEventListeners() {
+        while (JSEvents.eventHandlers.length) {
+          JSEvents._removeHandler(JSEvents.eventHandlers.length - 1);
+        }
+        JSEvents.deferredCalls = [];
+      },
+  inEventHandler:0,
+  deferredCalls:[],
+  deferCall(targetFunction, precedence, argsList) {
+        function arraysHaveEqualContent(arrA, arrB) {
+          if (arrA.length != arrB.length) return false;
+  
+          for (var i in arrA) {
+            if (arrA[i] != arrB[i]) return false;
+          }
+          return true;
+        }
+        // Test if the given call was already queued, and if so, don't add it again.
+        for (var i in JSEvents.deferredCalls) {
+          var call = JSEvents.deferredCalls[i];
+          if (call.targetFunction == targetFunction && arraysHaveEqualContent(call.argsList, argsList)) {
+            return;
+          }
+        }
+        JSEvents.deferredCalls.push({
+          targetFunction,
+          precedence,
+          argsList
+        });
+  
+        JSEvents.deferredCalls.sort((x,y) => x.precedence < y.precedence);
+      },
+  removeDeferredCalls(targetFunction) {
+        for (var i = 0; i < JSEvents.deferredCalls.length; ++i) {
+          if (JSEvents.deferredCalls[i].targetFunction == targetFunction) {
+            JSEvents.deferredCalls.splice(i, 1);
+            --i;
+          }
+        }
+      },
+  canPerformEventHandlerRequests() {
+        if (navigator.userActivation) {
+          // Verify against transient activation status from UserActivation API
+          // whether it is possible to perform a request here without needing to defer. See
+          // https://developer.mozilla.org/en-US/docs/Web/Security/User_activation#transient_activation
+          // and https://caniuse.com/mdn-api_useractivation
+          // At the time of writing, Firefox does not support this API: https://bugzilla.mozilla.org/show_bug.cgi?id=1791079
+          return navigator.userActivation.isActive;
+        }
+  
+        return JSEvents.inEventHandler && JSEvents.currentEventHandler.allowsDeferredCalls;
+      },
+  runDeferredCalls() {
+        if (!JSEvents.canPerformEventHandlerRequests()) {
+          return;
+        }
+        for (var i = 0; i < JSEvents.deferredCalls.length; ++i) {
+          var call = JSEvents.deferredCalls[i];
+          JSEvents.deferredCalls.splice(i, 1);
+          --i;
+          call.targetFunction(...call.argsList);
+        }
+      },
+  eventHandlers:[],
+  removeAllHandlersOnTarget:(target, eventTypeString) => {
+        for (var i = 0; i < JSEvents.eventHandlers.length; ++i) {
+          if (JSEvents.eventHandlers[i].target == target &&
+            (!eventTypeString || eventTypeString == JSEvents.eventHandlers[i].eventTypeString)) {
+             JSEvents._removeHandler(i--);
+           }
+        }
+      },
+  _removeHandler(i) {
+        var h = JSEvents.eventHandlers[i];
+        h.target.removeEventListener(h.eventTypeString, h.eventListenerFunc, h.useCapture);
+        JSEvents.eventHandlers.splice(i, 1);
+      },
+  registerOrRemoveHandler(eventHandler) {
+        if (!eventHandler.target) {
+          err('registerOrRemoveHandler: the target element for event handler registration does not exist, when processing the following event handler registration:');
+          console.dir(eventHandler);
+          return -4;
+        }
+        if (eventHandler.callbackfunc) {
+          eventHandler.eventListenerFunc = function(event) {
+            // Increment nesting count for the event handler.
+            ++JSEvents.inEventHandler;
+            JSEvents.currentEventHandler = eventHandler;
+            // Process any old deferred calls the user has placed.
+            JSEvents.runDeferredCalls();
+            // Process the actual event, calls back to user C code handler.
+            eventHandler.handlerFunc(event);
+            // Process any new deferred calls that were placed right now from this event handler.
+            JSEvents.runDeferredCalls();
+            // Out of event handler - restore nesting count.
+            --JSEvents.inEventHandler;
+          };
+  
+          eventHandler.target.addEventListener(eventHandler.eventTypeString,
+                                               eventHandler.eventListenerFunc,
+                                               eventHandler.useCapture);
+          JSEvents.eventHandlers.push(eventHandler);
+        } else {
+          for (var i = 0; i < JSEvents.eventHandlers.length; ++i) {
+            if (JSEvents.eventHandlers[i].target == eventHandler.target
+             && JSEvents.eventHandlers[i].eventTypeString == eventHandler.eventTypeString) {
+               JSEvents._removeHandler(i--);
+             }
+          }
+        }
+        return 0;
+      },
+  getNodeNameForTarget(target) {
+        if (!target) return '';
+        if (target == window) return '#window';
+        if (target == screen) return '#screen';
+        return target?.nodeName || '';
+      },
+  fullscreenEnabled() {
+        return document.fullscreenEnabled
+        // Safari 13.0.3 on macOS Catalina 10.15.1 still ships with prefixed webkitFullscreenEnabled.
+        // TODO: If Safari at some point ships with unprefixed version, update the version check above.
+        || document.webkitFullscreenEnabled
+         ;
+      },
+  };
+  
+  var maybeCStringToJsString = (cString) => {
+      // "cString > 2" checks if the input is a number, and isn't of the special
+      // values we accept here, EMSCRIPTEN_EVENT_TARGET_* (which map to 0, 1, 2).
+      // In other words, if cString > 2 then it's a pointer to a valid place in
+      // memory, and points to a C string.
+      return cString > 2 ? UTF8ToString(cString) : cString;
+    };
+  
+  /** @type {Object} */
+  var specialHTMLTargets = [0, typeof document != 'undefined' ? document : 0, typeof window != 'undefined' ? window : 0];
+  /** @suppress {duplicate } */
+  var findEventTarget = (target) => {
+      target = maybeCStringToJsString(target);
+      var domElement = specialHTMLTargets[target] || (typeof document != 'undefined' ? document.querySelector(target) : undefined);
+      return domElement;
+    };
+  var findCanvasEventTarget = findEventTarget;
+  var _emscripten_set_canvas_element_size = (target, width, height) => {
+      var canvas = findCanvasEventTarget(target);
+      if (!canvas) return -4;
+      canvas.width = width;
+      canvas.height = height;
+      return 0;
+    };
+
   
   var handleException = (e) => {
       // Certain exception types we do not treat as errors since they are used for
@@ -5265,6 +5418,153 @@ function dbg(...args) {
   var _emscripten_set_main_loop_arg = (func, arg, fps, simulateInfiniteLoop) => {
       var browserIterationFunc = () => ((a1) => dynCall_vi(func, a1))(arg);
       setMainLoop(browserIterationFunc, fps, simulateInfiniteLoop, arg);
+    };
+
+  
+  
+  var getBoundingClientRect = (e) => specialHTMLTargets.indexOf(e) < 0 ? e.getBoundingClientRect() : {'left':0,'top':0};
+  
+  var fillMouseEventData = (eventStruct, e, target) => {
+      assert(eventStruct % 4 == 0);
+      HEAPF64[((eventStruct)>>3)] = e.timeStamp;
+      var idx = ((eventStruct)>>2);
+      HEAP32[idx + 2] = e.screenX;
+      HEAP32[idx + 3] = e.screenY;
+      HEAP32[idx + 4] = e.clientX;
+      HEAP32[idx + 5] = e.clientY;
+      HEAP32[idx + 6] = e.ctrlKey;
+      HEAP32[idx + 7] = e.shiftKey;
+      HEAP32[idx + 8] = e.altKey;
+      HEAP32[idx + 9] = e.metaKey;
+      HEAP16[idx*2 + 20] = e.button;
+      HEAP16[idx*2 + 21] = e.buttons;
+  
+      HEAP32[idx + 11] = e["movementX"]
+        ;
+  
+      HEAP32[idx + 12] = e["movementY"]
+        ;
+  
+      // Note: rect contains doubles (truncated to placate SAFE_HEAP, which is the same behaviour when writing to HEAP32 anyway)
+      var rect = getBoundingClientRect(target);
+      HEAP32[idx + 13] = e.clientX - (rect.left | 0);
+      HEAP32[idx + 14] = e.clientY - (rect.top  | 0);
+  
+    };
+  
+  
+  var registerMouseEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
+      if (!JSEvents.mouseEvent) JSEvents.mouseEvent = _malloc(72);
+      target = findEventTarget(target);
+  
+      var mouseEventHandlerFunc = (e = event) => {
+        // TODO: Make this access thread safe, or this could update live while app is reading it.
+        fillMouseEventData(JSEvents.mouseEvent, e, target);
+  
+        if (((a1, a2, a3) => dynCall_iiii(callbackfunc, a1, a2, a3))(eventTypeId, JSEvents.mouseEvent, userData)) e.preventDefault();
+      };
+  
+      var eventHandler = {
+        target,
+        allowsDeferredCalls: eventTypeString != 'mousemove' && eventTypeString != 'mouseenter' && eventTypeString != 'mouseleave', // Mouse move events do not allow fullscreen/pointer lock requests to be handled in them!
+        eventTypeString,
+        callbackfunc,
+        handlerFunc: mouseEventHandlerFunc,
+        useCapture
+      };
+      return JSEvents.registerOrRemoveHandler(eventHandler);
+    };
+  var _emscripten_set_mousedown_callback_on_thread = (target, userData, useCapture, callbackfunc, targetThread) =>
+      registerMouseEventCallback(target, userData, useCapture, callbackfunc, 5, "mousedown", targetThread);
+
+  var _emscripten_set_mousemove_callback_on_thread = (target, userData, useCapture, callbackfunc, targetThread) =>
+      registerMouseEventCallback(target, userData, useCapture, callbackfunc, 8, "mousemove", targetThread);
+
+  var _emscripten_set_mouseup_callback_on_thread = (target, userData, useCapture, callbackfunc, targetThread) =>
+      registerMouseEventCallback(target, userData, useCapture, callbackfunc, 6, "mouseup", targetThread);
+
+  
+  
+  var registerUiEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
+      if (!JSEvents.uiEvent) JSEvents.uiEvent = _malloc(36);
+  
+      target = findEventTarget(target);
+  
+      var uiEventHandlerFunc = (e = event) => {
+        if (e.target != target) {
+          // Never take ui events such as scroll via a 'bubbled' route, but always from the direct element that
+          // was targeted. Otherwise e.g. if app logs a message in response to a page scroll, the Emscripten log
+          // message box could cause to scroll, generating a new (bubbled) scroll message, causing a new log print,
+          // causing a new scroll, etc..
+          return;
+        }
+        var b = document.body; // Take document.body to a variable, Closure compiler does not outline access to it on its own.
+        if (!b) {
+          // During a page unload 'body' can be null, with "Cannot read property 'clientWidth' of null" being thrown
+          return;
+        }
+        var uiEvent = JSEvents.uiEvent;
+        HEAP32[((uiEvent)>>2)] = 0; // always zero for resize and scroll
+        HEAP32[(((uiEvent)+(4))>>2)] = b.clientWidth;
+        HEAP32[(((uiEvent)+(8))>>2)] = b.clientHeight;
+        HEAP32[(((uiEvent)+(12))>>2)] = innerWidth;
+        HEAP32[(((uiEvent)+(16))>>2)] = innerHeight;
+        HEAP32[(((uiEvent)+(20))>>2)] = outerWidth;
+        HEAP32[(((uiEvent)+(24))>>2)] = outerHeight;
+        HEAP32[(((uiEvent)+(28))>>2)] = pageXOffset | 0; // scroll offsets are float
+        HEAP32[(((uiEvent)+(32))>>2)] = pageYOffset | 0;
+        if (((a1, a2, a3) => dynCall_iiii(callbackfunc, a1, a2, a3))(eventTypeId, uiEvent, userData)) e.preventDefault();
+      };
+  
+      var eventHandler = {
+        target,
+        eventTypeString,
+        callbackfunc,
+        handlerFunc: uiEventHandlerFunc,
+        useCapture
+      };
+      return JSEvents.registerOrRemoveHandler(eventHandler);
+    };
+  var _emscripten_set_resize_callback_on_thread = (target, userData, useCapture, callbackfunc, targetThread) =>
+      registerUiEventCallback(target, userData, useCapture, callbackfunc, 10, "resize", targetThread);
+
+  
+  
+  
+  
+  var registerWheelEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
+      if (!JSEvents.wheelEvent) JSEvents.wheelEvent = _malloc(104);
+  
+      // The DOM Level 3 events spec event 'wheel'
+      var wheelHandlerFunc = (e = event) => {
+        var wheelEvent = JSEvents.wheelEvent;
+        fillMouseEventData(wheelEvent, e, target);
+        HEAPF64[(((wheelEvent)+(72))>>3)] = e["deltaX"];
+        HEAPF64[(((wheelEvent)+(80))>>3)] = e["deltaY"];
+        HEAPF64[(((wheelEvent)+(88))>>3)] = e["deltaZ"];
+        HEAP32[(((wheelEvent)+(96))>>2)] = e["deltaMode"];
+        if (((a1, a2, a3) => dynCall_iiii(callbackfunc, a1, a2, a3))(eventTypeId, wheelEvent, userData)) e.preventDefault();
+      };
+  
+      var eventHandler = {
+        target,
+        allowsDeferredCalls: true,
+        eventTypeString,
+        callbackfunc,
+        handlerFunc: wheelHandlerFunc,
+        useCapture
+      };
+      return JSEvents.registerOrRemoveHandler(eventHandler);
+    };
+  
+  var _emscripten_set_wheel_callback_on_thread = (target, userData, useCapture, callbackfunc, targetThread) => {
+      target = findEventTarget(target);
+      if (!target) return -4;
+      if (typeof target.onwheel != 'undefined') {
+        return registerWheelEventCallback(target, userData, useCapture, callbackfunc, 9, "wheel", targetThread);
+      } else {
+        return -1;
+      }
     };
 
   var _emscripten_sleep = (ms) => {
@@ -6817,6 +7117,8 @@ function dbg(...args) {
 
   var _glfwDestroyWindow = (winid) => GLFW.destroyWindow(winid);
 
+  var _glfwGetCursorPos = (winid, x, y) => GLFW.getCursorPos(winid, x, y);
+
   var _glfwGetTime = () => GLFW.getTime() - GLFW.initialTime;
 
   
@@ -6873,6 +7175,12 @@ function dbg(...args) {
     };
 
   var _glfwPollEvents = () => {};
+
+  var _glfwSetWindowUserPointer = (winid, ptr) => {
+      var win = GLFW.WindowFromId(winid);
+      if (!win) return;
+      win.userptr = ptr;
+    };
 
   var _glfwTerminate = () => {
       window.removeEventListener("gamepadconnected", GLFW.onGamepadConnected, true);
@@ -7613,6 +7921,19 @@ function dbg(...args) {
 
   var _wgpuBindGroupRelease = (id) => WebGPU.mgrBindGroup.release(id);
 
+  var _wgpuBufferDestroy = (bufferId) => {
+      var bufferWrapper = WebGPU.mgrBuffer.objects[bufferId];
+      assert(typeof bufferWrapper != "undefined");
+      if (bufferWrapper.onUnmap) {
+        for (var i = 0; i < bufferWrapper.onUnmap.length; ++i) {
+          bufferWrapper.onUnmap[i]();
+        }
+        bufferWrapper.onUnmap = undefined;
+      }
+  
+      WebGPU.mgrBuffer.get(bufferId).destroy();
+    };
+
   var _wgpuBufferRelease = (id) => WebGPU.mgrBuffer.release(id);
 
   var _wgpuCommandBufferRelease = (id) => WebGPU.mgrCommandBuffer.release(id);
@@ -8179,6 +8500,39 @@ function dbg(...args) {
     };
 
   
+  var _wgpuDeviceCreateSampler = (deviceId, descriptor) => {
+      var desc;
+      if (descriptor) {
+        assert(descriptor);assert(HEAPU32[((descriptor)>>2)] === 0);
+  
+        desc = {
+          "label": undefined,
+          "addressModeU": WebGPU.AddressMode[
+              HEAPU32[(((descriptor)+(8))>>2)]],
+          "addressModeV": WebGPU.AddressMode[
+              HEAPU32[(((descriptor)+(12))>>2)]],
+          "addressModeW": WebGPU.AddressMode[
+              HEAPU32[(((descriptor)+(16))>>2)]],
+          "magFilter": WebGPU.FilterMode[
+              HEAPU32[(((descriptor)+(20))>>2)]],
+          "minFilter": WebGPU.FilterMode[
+              HEAPU32[(((descriptor)+(24))>>2)]],
+          "mipmapFilter": WebGPU.MipmapFilterMode[
+              HEAPU32[(((descriptor)+(28))>>2)]],
+          "lodMinClamp": HEAPF32[(((descriptor)+(32))>>2)],
+          "lodMaxClamp": HEAPF32[(((descriptor)+(36))>>2)],
+          "compare": WebGPU.CompareFunction[
+              HEAPU32[(((descriptor)+(40))>>2)]],
+        };
+        var labelPtr = HEAPU32[(((descriptor)+(4))>>2)];
+        if (labelPtr) desc["label"] = UTF8ToString(labelPtr);
+      }
+  
+      var device = WebGPU.mgrDevice.get(deviceId);
+      return WebGPU.mgrSampler.create(device.createSampler(desc));
+    };
+
+  
   var _wgpuDeviceCreateShaderModule = (deviceId, descriptor) => {
       assert(descriptor);
       var nextInChainPtr = HEAPU32[((descriptor)>>2)];
@@ -8275,23 +8629,6 @@ function dbg(...args) {
       };
     };
 
-  var maybeCStringToJsString = (cString) => {
-      // "cString > 2" checks if the input is a number, and isn't of the special
-      // values we accept here, EMSCRIPTEN_EVENT_TARGET_* (which map to 0, 1, 2).
-      // In other words, if cString > 2 then it's a pointer to a valid place in
-      // memory, and points to a C string.
-      return cString > 2 ? UTF8ToString(cString) : cString;
-    };
-  
-  /** @type {Object} */
-  var specialHTMLTargets = [0, typeof document != 'undefined' ? document : 0, typeof window != 'undefined' ? window : 0];
-  /** @suppress {duplicate } */
-  var findEventTarget = (target) => {
-      target = maybeCStringToJsString(target);
-      var domElement = specialHTMLTargets[target] || (typeof document != 'undefined' ? document.querySelector(target) : undefined);
-      return domElement;
-    };
-  var findCanvasEventTarget = findEventTarget;
   
   
   var _wgpuInstanceCreateSurface = (instanceId, descriptor) => {
@@ -8365,8 +8702,6 @@ function dbg(...args) {
         });
       });
     };
-
-  var _wgpuPipelineLayoutRelease = (id) => WebGPU.mgrPipelineLayout.release(id);
 
   var _wgpuQueueRelease = (id) => WebGPU.mgrQueue.release(id);
 
@@ -8452,6 +8787,8 @@ function dbg(...args) {
 
   var _wgpuRenderPipelineRelease = (id) => WebGPU.mgrRenderPipeline.release(id);
 
+  var _wgpuSamplerRelease = (id) => WebGPU.mgrSampler.release(id);
+
   var _wgpuShaderModuleRelease = (id) => WebGPU.mgrShaderModule.release(id);
 
   var _wgpuSurfaceConfigure = (surfaceId, config) => {
@@ -8508,11 +8845,6 @@ function dbg(...args) {
         // TODO(https://github.com/webgpu-native/webgpu-headers/issues/291): What should the status be here?
         HEAP32[(((surfaceTexturePtr)+(8))>>2)] = 5;
       }
-    };
-
-  var _wgpuSurfaceGetPreferredFormat = (surfaceId, adapterId) => {
-      var format = navigator["gpu"]["getPreferredCanvasFormat"]();
-      return WebGPU.Int_PreferredFormat[format];
     };
 
   var _wgpuSurfaceRelease = (id) => WebGPU.mgrSurface.release(id);
@@ -8899,7 +9231,19 @@ var wasmImports = {
   /** @export */
   emscripten_resize_heap: _emscripten_resize_heap,
   /** @export */
+  emscripten_set_canvas_element_size: _emscripten_set_canvas_element_size,
+  /** @export */
   emscripten_set_main_loop_arg: _emscripten_set_main_loop_arg,
+  /** @export */
+  emscripten_set_mousedown_callback_on_thread: _emscripten_set_mousedown_callback_on_thread,
+  /** @export */
+  emscripten_set_mousemove_callback_on_thread: _emscripten_set_mousemove_callback_on_thread,
+  /** @export */
+  emscripten_set_mouseup_callback_on_thread: _emscripten_set_mouseup_callback_on_thread,
+  /** @export */
+  emscripten_set_resize_callback_on_thread: _emscripten_set_resize_callback_on_thread,
+  /** @export */
+  emscripten_set_wheel_callback_on_thread: _emscripten_set_wheel_callback_on_thread,
   /** @export */
   emscripten_sleep: _emscripten_sleep,
   /** @export */
@@ -8921,11 +9265,15 @@ var wasmImports = {
   /** @export */
   glfwDestroyWindow: _glfwDestroyWindow,
   /** @export */
+  glfwGetCursorPos: _glfwGetCursorPos,
+  /** @export */
   glfwGetTime: _glfwGetTime,
   /** @export */
   glfwInit: _glfwInit,
   /** @export */
   glfwPollEvents: _glfwPollEvents,
+  /** @export */
+  glfwSetWindowUserPointer: _glfwSetWindowUserPointer,
   /** @export */
   glfwTerminate: _glfwTerminate,
   /** @export */
@@ -8940,6 +9288,8 @@ var wasmImports = {
   wgpuBindGroupLayoutRelease: _wgpuBindGroupLayoutRelease,
   /** @export */
   wgpuBindGroupRelease: _wgpuBindGroupRelease,
+  /** @export */
+  wgpuBufferDestroy: _wgpuBufferDestroy,
   /** @export */
   wgpuBufferRelease: _wgpuBufferRelease,
   /** @export */
@@ -8963,6 +9313,8 @@ var wasmImports = {
   /** @export */
   wgpuDeviceCreateRenderPipeline: _wgpuDeviceCreateRenderPipeline,
   /** @export */
+  wgpuDeviceCreateSampler: _wgpuDeviceCreateSampler,
+  /** @export */
   wgpuDeviceCreateShaderModule: _wgpuDeviceCreateShaderModule,
   /** @export */
   wgpuDeviceCreateTexture: _wgpuDeviceCreateTexture,
@@ -8976,8 +9328,6 @@ var wasmImports = {
   wgpuInstanceCreateSurface: _wgpuInstanceCreateSurface,
   /** @export */
   wgpuInstanceRequestAdapter: _wgpuInstanceRequestAdapter,
-  /** @export */
-  wgpuPipelineLayoutRelease: _wgpuPipelineLayoutRelease,
   /** @export */
   wgpuQueueRelease: _wgpuQueueRelease,
   /** @export */
@@ -9001,13 +9351,13 @@ var wasmImports = {
   /** @export */
   wgpuRenderPipelineRelease: _wgpuRenderPipelineRelease,
   /** @export */
+  wgpuSamplerRelease: _wgpuSamplerRelease,
+  /** @export */
   wgpuShaderModuleRelease: _wgpuShaderModuleRelease,
   /** @export */
   wgpuSurfaceConfigure: _wgpuSurfaceConfigure,
   /** @export */
   wgpuSurfaceGetCurrentTexture: _wgpuSurfaceGetCurrentTexture,
-  /** @export */
-  wgpuSurfaceGetPreferredFormat: _wgpuSurfaceGetPreferredFormat,
   /** @export */
   wgpuSurfaceRelease: _wgpuSurfaceRelease,
   /** @export */
@@ -9026,9 +9376,9 @@ var wasmImports = {
 var wasmExports = createWasm();
 var ___wasm_call_ctors = createExportWrapper('__wasm_call_ctors', 0);
 var _main = Module['_main'] = createExportWrapper('__main_argc_argv', 2);
-var _fflush = createExportWrapper('fflush', 1);
-var _malloc = createExportWrapper('malloc', 1);
 var _free = createExportWrapper('free', 1);
+var _malloc = createExportWrapper('malloc', 1);
+var _fflush = createExportWrapper('fflush', 1);
 var _memalign = createExportWrapper('memalign', 2);
 var __emscripten_tempret_set = createExportWrapper('_emscripten_tempret_set', 1);
 var _emscripten_stack_init = () => (_emscripten_stack_init = wasmExports['emscripten_stack_init'])();
@@ -9039,27 +9389,27 @@ var __emscripten_stack_restore = (a0) => (__emscripten_stack_restore = wasmExpor
 var __emscripten_stack_alloc = (a0) => (__emscripten_stack_alloc = wasmExports['_emscripten_stack_alloc'])(a0);
 var _emscripten_stack_get_current = () => (_emscripten_stack_get_current = wasmExports['emscripten_stack_get_current'])();
 var ___cxa_is_pointer_type = createExportWrapper('__cxa_is_pointer_type', 1);
-var dynCall_viiii = Module['dynCall_viiii'] = createExportWrapper('dynCall_viiii', 5);
-var dynCall_viii = Module['dynCall_viii'] = createExportWrapper('dynCall_viii', 4);
 var dynCall_ii = Module['dynCall_ii'] = createExportWrapper('dynCall_ii', 2);
 var dynCall_vi = Module['dynCall_vi'] = createExportWrapper('dynCall_vi', 2);
+var dynCall_iiii = Module['dynCall_iiii'] = createExportWrapper('dynCall_iiii', 4);
+var dynCall_viii = Module['dynCall_viii'] = createExportWrapper('dynCall_viii', 4);
 var dynCall_vii = Module['dynCall_vii'] = createExportWrapper('dynCall_vii', 3);
 var dynCall_iii = Module['dynCall_iii'] = createExportWrapper('dynCall_iii', 3);
 var dynCall_v = Module['dynCall_v'] = createExportWrapper('dynCall_v', 1);
+var dynCall_viiii = Module['dynCall_viiii'] = createExportWrapper('dynCall_viiii', 5);
+var dynCall_viiiiii = Module['dynCall_viiiiii'] = createExportWrapper('dynCall_viiiiii', 7);
+var dynCall_iiiiii = Module['dynCall_iiiiii'] = createExportWrapper('dynCall_iiiiii', 6);
 var dynCall_iiiiiii = Module['dynCall_iiiiiii'] = createExportWrapper('dynCall_iiiiiii', 7);
 var dynCall_jiji = Module['dynCall_jiji'] = createExportWrapper('dynCall_jiji', 5);
-var dynCall_iiii = Module['dynCall_iiii'] = createExportWrapper('dynCall_iiii', 4);
 var dynCall_viijii = Module['dynCall_viijii'] = createExportWrapper('dynCall_viijii', 7);
 var dynCall_iidiiii = Module['dynCall_iidiiii'] = createExportWrapper('dynCall_iidiiii', 7);
 var dynCall_iiiii = Module['dynCall_iiiii'] = createExportWrapper('dynCall_iiiii', 5);
-var dynCall_iiiiii = Module['dynCall_iiiiii'] = createExportWrapper('dynCall_iiiiii', 6);
 var dynCall_iiiiiiiii = Module['dynCall_iiiiiiiii'] = createExportWrapper('dynCall_iiiiiiiii', 9);
 var dynCall_iiiiij = Module['dynCall_iiiiij'] = createExportWrapper('dynCall_iiiiij', 7);
 var dynCall_iiiiid = Module['dynCall_iiiiid'] = createExportWrapper('dynCall_iiiiid', 6);
 var dynCall_iiiiijj = Module['dynCall_iiiiijj'] = createExportWrapper('dynCall_iiiiijj', 9);
 var dynCall_iiiiiiii = Module['dynCall_iiiiiiii'] = createExportWrapper('dynCall_iiiiiiii', 8);
 var dynCall_iiiiiijj = Module['dynCall_iiiiiijj'] = createExportWrapper('dynCall_iiiiiijj', 10);
-var dynCall_viiiiii = Module['dynCall_viiiiii'] = createExportWrapper('dynCall_viiiiii', 7);
 var dynCall_viiiii = Module['dynCall_viiiii'] = createExportWrapper('dynCall_viiiii', 6);
 var _asyncify_start_unwind = createExportWrapper('asyncify_start_unwind', 1);
 var _asyncify_stop_unwind = createExportWrapper('asyncify_stop_unwind', 0);
@@ -9136,11 +9486,6 @@ var missingLibrarySymbols = [
   'stringToUTF32',
   'lengthBytesUTF32',
   'registerKeyEventCallback',
-  'getBoundingClientRect',
-  'fillMouseEventData',
-  'registerMouseEventCallback',
-  'registerWheelEventCallback',
-  'registerUiEventCallback',
   'registerFocusEventCallback',
   'fillDeviceOrientationEventData',
   'registerDeviceOrientationEventCallback',
@@ -9299,6 +9644,11 @@ var unexportedSymbols = [
   'maybeCStringToJsString',
   'findEventTarget',
   'findCanvasEventTarget',
+  'getBoundingClientRect',
+  'fillMouseEventData',
+  'registerMouseEventCallback',
+  'registerWheelEventCallback',
+  'registerUiEventCallback',
   'currentFullscreenStrategy',
   'restoreOldWindowedStyle',
   'UNWIND_CACHE',
