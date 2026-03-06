@@ -39,7 +39,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp78jtqaa3.js
+// include: /tmp/tmpol1eyddi.js
 
   if (!Module.expectedDataFileDownloads) {
     Module.expectedDataFileDownloads = 0;
@@ -224,25 +224,25 @@ Module['FS_createPath']("/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU
     }
 
     }
-    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/brickwall.jpg", "start": 0, "end": 198744}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/cube.obj", "start": 198744, "end": 199655}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/fourareen.mtl", "start": 199655, "end": 199963}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/fourareen.obj", "start": 199963, "end": 5291698}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/fourareen2K_albedo.jpg", "start": 5291698, "end": 6696380}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/mammoth.obj", "start": 6696380, "end": 22562936}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/plane.obj", "start": 22562936, "end": 22563238}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.obj", "start": 22563238, "end": 22571150}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.txt", "start": 22571150, "end": 22572235}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 22572235, "end": 22574549}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 22574549, "end": 22575085}], "remote_package_size": 22575085});
+    loadPackage({"files": [{"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/brickwall.jpg", "start": 0, "end": 198744}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/cube.obj", "start": 198744, "end": 199655}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/fourareen.mtl", "start": 199655, "end": 199963}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/fourareen.obj", "start": 199963, "end": 5291698}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/fourareen2K_albedo.jpg", "start": 5291698, "end": 6696380}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/mammoth.obj", "start": 6696380, "end": 22562936}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/plane.obj", "start": 22562936, "end": 22563238}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.obj", "start": 22563238, "end": 22571150}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/pyramid.txt", "start": 22571150, "end": 22572235}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/shader.wgsl", "start": 22572235, "end": 22574637}, {"filename": "/mnt/c/Users/Aitor/source/repos/LearnWebGPU/LearnWebGPU/resources/webgpu.txt", "start": 22574637, "end": 22575173}], "remote_package_size": 22575173});
 
   })();
 
-// end include: /tmp/tmp78jtqaa3.js
-// include: /tmp/tmpe2uh3r_3.js
+// end include: /tmp/tmpol1eyddi.js
+// include: /tmp/tmpn8dc0rpn.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmpe2uh3r_3.js
-// include: /tmp/tmpmuxhehps.js
+  // end include: /tmp/tmpn8dc0rpn.js
+// include: /tmp/tmpvwrx8y21.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmpmuxhehps.js
+  // end include: /tmp/tmpvwrx8y21.js
 
 
 // Sometimes an existing Module object exists with properties
@@ -4568,16 +4568,6 @@ function dbg(...args) {
     };
 
   
-  var findCanvasEventTarget = findEventTarget;
-  var _emscripten_set_canvas_element_size = (target, width, height) => {
-      var canvas = findCanvasEventTarget(target);
-      if (!canvas) return -4;
-      canvas.width = width;
-      canvas.height = height;
-      return 0;
-    };
-
-  
   var handleException = (e) => {
       // Certain exception types we do not treat as errors since they are used for
       // internal control flow.
@@ -8761,6 +8751,7 @@ function dbg(...args) {
       };
     };
 
+  var findCanvasEventTarget = findEventTarget;
   
   
   var _wgpuInstanceCreateSurface = (instanceId, descriptor) => {
@@ -9053,16 +9044,6 @@ function dbg(...args) {
       var texture = WebGPU.mgrTexture.get(textureId);
       // Should return the enum integer instead of string.
       return WebGPU.TextureFormat.indexOf(texture.format);
-    };
-
-  var _wgpuTextureGetHeight = (textureId) => {
-      var texture = WebGPU.mgrTexture.get(textureId);
-      return texture.height;
-    };
-
-  var _wgpuTextureGetWidth = (textureId) => {
-      var texture = WebGPU.mgrTexture.get(textureId);
-      return texture.width;
     };
 
   var _wgpuTextureRelease = (id) => WebGPU.mgrTexture.release(id);
@@ -9409,8 +9390,6 @@ var wasmImports = {
   /** @export */
   emscripten_resize_heap: _emscripten_resize_heap,
   /** @export */
-  emscripten_set_canvas_element_size: _emscripten_set_canvas_element_size,
-  /** @export */
   emscripten_set_main_loop_arg: _emscripten_set_main_loop_arg,
   /** @export */
   emscripten_set_mousedown_callback_on_thread: _emscripten_set_mousedown_callback_on_thread,
@@ -9601,10 +9580,6 @@ var wasmImports = {
   /** @export */
   wgpuTextureGetFormat: _wgpuTextureGetFormat,
   /** @export */
-  wgpuTextureGetHeight: _wgpuTextureGetHeight,
-  /** @export */
-  wgpuTextureGetWidth: _wgpuTextureGetWidth,
-  /** @export */
   wgpuTextureRelease: _wgpuTextureRelease,
   /** @export */
   wgpuTextureViewRelease: _wgpuTextureViewRelease
@@ -9627,6 +9602,7 @@ var _emscripten_stack_get_current = () => (_emscripten_stack_get_current = wasmE
 var ___cxa_is_pointer_type = createExportWrapper('__cxa_is_pointer_type', 1);
 var dynCall_ii = Module['dynCall_ii'] = createExportWrapper('dynCall_ii', 2);
 var dynCall_vi = Module['dynCall_vi'] = createExportWrapper('dynCall_vi', 2);
+var dynCall_ff = Module['dynCall_ff'] = createExportWrapper('dynCall_ff', 2);
 var dynCall_iiii = Module['dynCall_iiii'] = createExportWrapper('dynCall_iiii', 4);
 var dynCall_viii = Module['dynCall_viii'] = createExportWrapper('dynCall_viii', 4);
 var dynCall_vii = Module['dynCall_vii'] = createExportWrapper('dynCall_vii', 3);
